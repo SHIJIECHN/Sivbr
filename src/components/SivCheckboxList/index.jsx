@@ -54,7 +54,9 @@ function SivCheckList({
    * checkedData里；如果假说明反选，也就是撤销掉了，就把checkedData清空
    */
   const setAllCheck = useCallback((e) => {
+    // 获取多选框选中状态
     const _checked = e.target.checked;
+    // _checked为true，则全部选中；为false，则全部全部取消选中
     setCheckedData(_checked ? originData : [])
   })
 
@@ -64,7 +66,9 @@ function SivCheckList({
    * 则把当前项从checkedData里删除掉
    */
   const setSingleCheck = useCallback((e, item) => {
+    // 获取多选框选中状态
     const _checked = e.target.checked;
+    // _checked为true，则将item合并到checkedData中；为false，则将该项从checkedData中删除
     setCheckedData(checkedData => _checked ?
       [...checkedData, item] : // 合并item和checkedData
       checkedData.filter(data => data.id !== item.id)
@@ -77,7 +81,9 @@ function SivCheckList({
    * 同时从originData和checkedData中删除
    */
   const removeItem = useCallback((id) => {
+    // 从原始originData中删除该项
     setOriginData(originData => originData.filter(data => data.id !== id));
+    // 从选中数据checkedData中删除该项
     setCheckedData(checkedData => checkedData.filter(data => data.id !== id))
   })
 
@@ -85,6 +91,7 @@ function SivCheckList({
     <div>
       <table border="1" width="500" align="center">
         <thead>
+          {/* 显示全部选择多选框 */}
           <tr>
             <td colSpan={5} align="left">
               <SivCheckbox
@@ -95,6 +102,7 @@ function SivCheckList({
               </SivCheckbox>
             </td>
           </tr>
+          {/* 显示表格头部 */}
           {
             headerCells && (
               <tr>
@@ -112,6 +120,7 @@ function SivCheckList({
           {
             originData.length !== 0 && originData.map(item => (
               <tr key={item.id}>
+                {/* 多选框 */}
                 <td>
                   <SivCheckbox
                     checked={
@@ -120,11 +129,13 @@ function SivCheckList({
                     onChange={(e) => setSingleCheck(e, item)}
                   ></SivCheckbox>
                 </td>
+                {/* 列表项 */}
                 {
                   dataProps.map(prop => (
                     <td key={prop}>{item[prop]}</td>
                   ))
                 }
+                {/* 删除按钮 */}
                 <td>
                   <SivButton
                     type="warn"
