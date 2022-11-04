@@ -1,5 +1,6 @@
 import './index.scss'
 
+// 按钮类型
 const btnType = [
   'primary',
   'success',
@@ -8,7 +9,12 @@ const btnType = [
 ]
 
 /**
- * resProps剩余传入的属性。包括传进来的onClick属性，所以点击button会有反应
+ * 按钮
+ * @param {string} type 按钮类型btnType中的其中一项 
+ * @param {*} children 子元素 
+ * @param {*} resProps 传入的剩余参数。
+ *     包括传进来的onClick属性，所以点击button会有反应
+ * @returns 
  */
 function SivButton({
   type,
