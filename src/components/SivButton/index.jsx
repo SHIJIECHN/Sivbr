@@ -25,9 +25,10 @@ function SivButton({
   // 通过函数计算样式属性
   // btn btn-primary的形式返回。默认是btn-primary
   const createStyleClass = () => {
+    // btnType是否包含type类型，如果包含则返回btn-*，如果不包含默认为btn-primary
     let _type = btnType.includes(type);
     _type = _type ? `btn-${type}` : 'btn-primary';
-
+    // 拼接，即返回btn btn-*
     return ['btn', _type].join(' ');
   }
 
